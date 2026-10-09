@@ -1,25 +1,75 @@
 import 'package:flutter/material.dart';
-import 'package:wajiha_game_core/wajiha_game_core.dart';
-import 'game_screen.dart';
+import 'screens/splash_screen.dart';
+import 'services/audio_service.dart';
+import 'services/settings_service.dart';
 
-void main() => runApp(const LoneStarPokerApp());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  final settings = PokerSettings();
+  await settings.load();
+  final audio = SaloonAudio();
+  audio.configure(
+    musicOn: settings.musicOn,
+    sfxOn: settings.sfxOn,
+    volume: settings.volume,
+  );
+  runApp(LoneStarPokerApp(settings: settings, audio: audio));
+}
 
-class LoneStarPokerApp extends StatelessWidget {
-  const LoneStarPokerApp({super.key});
+class LoneStarPokerApp extends StatefulWidget {
+  final PokerSettings settings;
+  final SaloonAudio audio;
+  const LoneStarPokerApp(
+      {super.key, required this.settings, required this.audio});
+
+  @override
+  State<LoneStarPokerApp> createState() => _LoneStarPokerAppState();
+}
+
+class _LoneStarPokerAppState extends State<LoneStarPokerApp>
+    with WidgetsBindingObserver {
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addObserver(this);
+  }
+
+  @override
+  void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+    widget.audio.dispose();
+    super.dispose();
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    // Pause (not stop) on interruption so music resumes exactly where it
+    // left off; the game screen additionally freezes its engine.
+    if (state == AppLifecycleState.paused ||
+        state == AppLifecycleState.inactive) {
+      widget.audio.onAppPaused();
+    } else if (state == AppLifecycleState.resumed) {
+      widget.audio.onAppResumed();
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
-    return GameShell(
-      variant: ShellVariant.neonArcade,
-      title: 'Lone Star Poker',
-      tagline: 'Howdy, partner! Out-bluff three crafty bots in Texas-style showdowns. 🤠',
-      emoji: '♠️',
-      slug: 'lonestarpoker',
-      howToPlay:
-          '• You + 3 bot rivals, 500 chips each. Blinds 5/10 keep it spicy. 🌶️\n• Two hole cards, then the flop, turn and river hit the felt.\n• Bet with Fold, Check/Call, or Raise. Bots bluff — trust no one! 👀\n• Best 5-card hand wins the pot at showdown.\n• Go broke and the game\'s over. Feeling rich? Walk away like a legend! 🤠',
-      playerOptions: const [1],
-      supportsBots: false,
-      gameBuilder: (ctx, players, cb) => LoneStarPokerScreen(players: players, callbacks: cb),
+    return ListenableBuilder(
+      listenable: widget.settings,
+      builder: (_, _) => MaterialApp(
+        title: 'Lone Star Poker',
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(
+          useMaterial3: true,
+          scaffoldBackgroundColor: widget.settings.theme.feltBottom,
+          colorScheme: ColorScheme.fromSeed(
+            seedColor: widget.settings.theme.accent,
+            brightness: Brightness.dark,
+          ),
+        ),
+        home: SplashScreen(audio: widget.audio, settings: widget.settings),
+      ),
     );
   }
 }
