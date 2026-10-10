@@ -45,11 +45,6 @@ class _ProScreenState extends State<ProScreen> {
     await _store.init();
     if (mounted) setState(() => _loading = false);
   }
-
-    if (_store.proPurchased.value) {
-      widget.settings.setPro(true);
-      widget.audio.win();
-    }
   }
 
   void _onThanks() {
