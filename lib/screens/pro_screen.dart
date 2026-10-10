@@ -45,7 +45,6 @@ class _ProScreenState extends State<ProScreen> {
     await _store.init();
     if (mounted) setState(() => _loading = false);
   }
-  }
 
   void _onThanks() {
     final msg = _store.lastThanks.value;
