@@ -72,7 +72,7 @@ class PokerSettings extends ChangeNotifier {
   String themeId = 'saloon';
   String cardStyleId = 'classic';
   String chipStyleId = 'classic';
-  bool isPro = false;
+  bool isPro = true; // everything unlocked — no Pro version
   int handsPlayed = 0;
   int handsWon = 0;
   int biggestPot = 0;
@@ -143,7 +143,7 @@ class PokerSettings extends ChangeNotifier {
     themeId = p.getString(_kTheme) ?? 'saloon';
     cardStyleId = p.getString(_kCardStyle) ?? 'classic';
     chipStyleId = p.getString(_kChipStyle) ?? 'classic';
-    isPro = p.getBool(_kIsPro) ?? false;
+    isPro = true; // everything unlocked
     handsPlayed = p.getInt(_kHands) ?? 0;
     handsWon = p.getInt(_kHandsWon) ?? 0;
     biggestPot = p.getInt(_kBiggestPot) ?? 0;
