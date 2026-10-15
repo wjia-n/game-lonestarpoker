@@ -1,4 +1,4 @@
-/// Texas Hold'em 7-card hand evaluator for Lone Star Poker.
+/// Hold'em 7-card hand evaluator for Lone Star Poker.
 ///
 /// Cards are ints 0..51: rank = card % 13 (0 = deuce … 12 = ace),
 /// suit = card ~/ 13 (0 = spades, 1 = hearts, 2 = diamonds, 3 = clubs).

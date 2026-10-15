@@ -22,7 +22,7 @@ class _ProScreenState extends State<ProScreen> {
   bool _loading = true;
 
   static const _comparison = [
-    ('Full Texas Hold\u2019em game', true, true),
+    ('Full Hold\u2019em game', true, true),
     ('3 bot difficulties (Greenhorn / Sharp / Legend)', true, true),
     ('Pass-and-play with friends', true, true),
     ('6 felt themes, 4 card backs, 3 chip styles', true, true),

@@ -69,7 +69,7 @@ class WinInfo {
   WinInfo(this.seat, this.amount, this.handName, this.split);
 }
 
-/// Texas Hold'em engine. Owns ALL turn state and phases.
+/// Hold'em engine. Owns ALL turn state and phases.
 ///
 /// Reliability design:
 /// - Exactly one engine [Timer] is ever scheduled ([_schedule] cancels the

@@ -36,7 +36,7 @@ class _MenuScreenState extends State<MenuScreen> {
     await SharePlus.instance.share(
       ShareParams(
         text:
-            'I\u2019m playing Lone Star Poker \u2014 Texas Hold\u2019em showdowns, crafty bots, zero real money. Take your seat!\n$_storeUrl',
+            'I\u2019m playing Lone Star Poker \u2014 Hold\u2019em showdowns, crafty bots, zero real money. Take your seat!\n$_storeUrl',
         subject: 'Lone Star Poker',
       ),
     );
@@ -101,7 +101,7 @@ class _MenuScreenState extends State<MenuScreen> {
                       style: Saloon.display(30, theme: theme),
                       textAlign: TextAlign.center),
                   const SizedBox(height: 4),
-                  Text('TEXAS HOLD\u2019EM SHOWDOWNS',
+                  Text('HOLD\u2019EM SHOWDOWNS',
                       style: Saloon.label(12, theme: theme)),
                   const SizedBox(height: 26),
                   Saloon.button(

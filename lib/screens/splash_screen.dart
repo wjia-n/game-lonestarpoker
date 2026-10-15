@@ -168,7 +168,7 @@ class _GameSplash extends StatelessWidget {
               Text('LONE STAR POKER', style: Saloon.display(34, theme: theme)),
               const SizedBox(height: 6),
               Text(
-                'TEXAS HOLD\u2019EM SHOWDOWNS',
+                'HOLD\u2019EM SHOWDOWNS',
                 style: Saloon.label(13, theme: theme),
               ),
               const SizedBox(height: 28),
