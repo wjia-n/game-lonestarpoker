@@ -3,6 +3,7 @@ import '../services/audio_service.dart';
 import '../services/settings_service.dart';
 import '../theme/poker_themes.dart';
 import '../theme/saloon_art.dart';
+import '../transfer/transfer_ui.dart';
 
 /// Audio controls and app preferences.
 class SettingsScreen extends StatelessWidget {
@@ -31,6 +32,7 @@ class SettingsScreen extends StatelessWidget {
         child: SafeArea(
           child: Column(
             children: [
+              TransferSaveTile(gameSlug: 'lonestarpoker'),
               _header(context, theme),
               Expanded(
                 child: ListenableBuilder(
